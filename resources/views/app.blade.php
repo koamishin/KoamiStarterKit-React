@@ -42,7 +42,12 @@
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
 
-    @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
+    @viteReactRefresh
+    @vite(array_values(array_filter([
+        'resources/css/app.css',
+        'resources/js/app.tsx',
+        file_exists(resource_path("js/pages/{$page['component']}.tsx")) ? "resources/js/pages/{$page['component']}.tsx" : null,
+    ])))
     @inertiaHead
 </head>
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Features\FeatureRegistry;
+use App\Http\Controllers\Settings\FeatureFlagsController;
 use App\Http\Controllers\Settings\FilamentAppAuthenticationController;
 use App\Http\Controllers\Settings\FilamentEmailAuthenticationController;
 use App\Http\Controllers\Settings\ProfileController;
@@ -54,12 +55,15 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
         FeatureRegistry::initialize();
         $user = Auth::user();
 
-        return Inertia::render('settings/Appearance', [
+        return Inertia::render('settings/appearance', [
             'availableFeatures' => [
                 'appearance' => FeatureRegistry::isFeatureAvailableForUser($user, 'settings_appearance'),
             ],
         ]);
     })->name('appearance.edit');
+
+    Route::get('settings/features', [FeatureFlagsController::class, 'edit'])->name('features.edit');
+    Route::patch('settings/features', [FeatureFlagsController::class, 'update'])->name('features.update');
 });
 
 /* @chisel-passkeys */

@@ -14,7 +14,7 @@ class BlogController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('PostIndex', [
+        return Inertia::render('post-index', [
             'posts' => DB::table('posts')
                 ->latest()
                 ->limit(20)

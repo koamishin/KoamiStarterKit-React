@@ -33,7 +33,7 @@ class FeatureFlagsController extends Controller
             ];
         }
 
-        return Inertia::render('settings/Features', [
+        return Inertia::render('settings/features', [
             'features' => $features,
         ]);
     }

@@ -35,7 +35,7 @@ test('blog index route is registered and renders the inertia page', function ():
     $this->get('/blog')
         ->assertSuccessful()
         ->assertInertia(fn ($page) => $page
-            ->component('PostIndex')
+            ->component('post-index')
             ->has('posts', 3)
         );
 });

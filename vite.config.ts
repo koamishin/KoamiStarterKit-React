@@ -1,7 +1,8 @@
 import inertia from '@inertiajs/vite';
 import { wayfinder } from '@laravel/vite-plugin-wayfinder';
+import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
-import vue from '@vitejs/plugin-vue';
+import react, { reactCompilerPreset } from '@vitejs/plugin-react';
 import fastGlob from 'fast-glob';
 import laravel from 'laravel-vite-plugin';
 import { fileURLToPath, URL } from 'node:url';
@@ -22,25 +23,20 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/js/app.ts',
+                'resources/js/app.tsx',
                 'resources/css/filament/admin/theme.css',
                 ...moduleEntries,
             ],
-            ssr: 'resources/js/ssr.ts',
             refresh: true,
         }),
         inertia(),
-        wayfinder({
-            formVariants: true,
+        react(),
+        babel({
+            presets: [reactCompilerPreset()],
         }),
         tailwindcss(),
-        vue({
-            template: {
-                transformAssetUrls: {
-                    base: null,
-                    includeAbsolute: false,
-                },
-            },
+        wayfinder({
+            formVariants: true,
         }),
     ]),
     lint: {

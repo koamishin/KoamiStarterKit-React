@@ -15,7 +15,7 @@ test('profile settings page includes filament mfa configuration', function (): v
         ->withSession(['auth.password_confirmed_at' => time()])
         ->get(route('security.edit'))
         ->assertInertia(fn (Assert $assert): AssertableInertia => $assert
-            ->component('settings/Security')
+            ->component('settings/security')
             ->has('filamentMfa.providers')
             ->has('filamentMfa.state')
         );
