@@ -36,9 +36,9 @@ test('react auth layout follows the application auth_layout setting', function (
 });
 
 test('auth layout setting is shared with inertia pages', function (): void {
-    $settings = app(ApplicationFeaturesSettings::class);
-    $settings->auth_layout = 'card';
-    $settings->save();
+    $applicationFeaturesSettings = app(ApplicationFeaturesSettings::class);
+    $applicationFeaturesSettings->auth_layout = 'card';
+    $applicationFeaturesSettings->save();
 
     $response = $this->get(route('login'));
 
